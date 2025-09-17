@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Ar Bekė jau atvažiavo?</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    #answer {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    #timer {
+      font-size: 2rem;
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ar Bekė jau atvažiavo?</h1>
+  <div id="answer"></div>
+  <div id="timer"></div>
+
+  <script>
+    const target = new Date("2025-09-19T12:00:00");
+
+    function updatePage() {
+      const now = new Date();
+      const diff = target - now;
+
+      const answerEl = document.getElementById("answer");
+      const timerEl = document.getElementById("timer");
+
+      if (diff <= 0) {
+        answerEl.textContent = "Bekė jau atvažiavo! 🐶🎉❤️";
+        timerEl.textContent = "";
+        return;
+      }
+
+      answerEl.textContent = "NE 😔";
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      timerEl.textContent = `Laukti liko: ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updatePage();
+    setInterval(updatePage, 1000);
+  </script>
+</body>
+</html>
